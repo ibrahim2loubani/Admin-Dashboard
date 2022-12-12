@@ -19,7 +19,12 @@ import {
   InputBase,
 } from '@mui/material';
 
-const Navbar = () => {
+interface NavbarProps {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }: NavbarProps) => {
   const dispatch = useDispatch();
   const theme: any = useTheme();
   return (
@@ -41,6 +46,20 @@ const Navbar = () => {
               <Search />
             </IconButton>
           </FlexBetween>
+        </FlexBetween>
+
+        {/* Right Side  */}
+        <FlexBetween gap='1.5rem'>
+          <IconButton onClick={() => dispatch(setMode())}>
+            {theme.palette.mode === 'dark' ? (
+              <DarkModeOutlined sx={{ fontSize: '25px' }} />
+            ) : (
+              <LightModeOutlined sx={{ fontSize: '25px' }} />
+            )}
+          </IconButton>
+          <IconButton>
+            <SettingsOutlined sx={{ fontSize: '25px' }} />
+          </IconButton>
         </FlexBetween>
       </Toolbar>
     </AppBar>
